@@ -25,6 +25,7 @@ public class TabActivity extends AppCompatActivity
     private ViewPager viewPager;
     private FacebookProfile personal;
     public static String FIREBASE_URL = "https://boiling-heat-1137.firebaseIO.com/";
+    public static String FIREBASE_URL2 = "https://crackling-inferno-4721.firebaseIO.com/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class TabActivity extends AppCompatActivity
         adapter.addFragment(new MeetFragment(), "Meet Up");
         adapter.addFragment(new HistoryFragment(), "History");
         adapter.addFragment(new ConfirmFragment(), "Confirm");
+        adapter.addFragment(new PrayerFragment(), "Prayer");
         viewPager.setAdapter(adapter);
     }
 

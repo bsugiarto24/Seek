@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/prayer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Enter a Prayer:"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <EditText
+        android:id="@+id/email_address"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/anonymous"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Anonymous?"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+
+    <CheckBox android:id="@+id/checkbox_cheese"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:onClick="onCheckboxClicked"/>
+
+    <ImageView
+        android:id="@+id/confirm"
+        android:layout_width="60dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_done_black_18dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/deny"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="sendPrayer"/>
+
+
+    <it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/myList"
+        card:list_card_layout_resourceID="@layout/history_list_thumbnail_layout" />
+
+</LinearLayout>

@@ -128,6 +128,9 @@ public class MeetFragment extends Fragment
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+
+            //call to submit meet up!
             case R.id.meet_button:
                 if (!friendsPicker.getText().toString().equals("Pick a friend") && chosenDate != null) {
                     MeetUp m = new MeetUp(friend.getName(), friend.getId());
