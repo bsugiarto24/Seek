@@ -58,33 +58,41 @@ public class PrayerFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         rlLayout = (LinearLayout) inflater.inflate(R.layout.fragment_prayer, container, false);
 
+        //initialize personal
         personal = ((TabActivity) getActivity()).getPersonal();
 
+        //set to anonymous as false
         isAnonymous = false;
+
+        //init cards and array of prayers
         cards = new ArrayList<>();
         displayArray = new ArrayList<>();
 
 
-        prayertext = (TextView) rlLayout.findViewById(R.id.text1);
+        //init prayer text view
+        prayertext = (TextView) rlLayout.findViewById(R.id.prayer_text);
 
+        //init send prayer and check box buttons
         sendPrayer = (Button) rlLayout.findViewById(R.id.send_prayer);
         sendPrayer.setOnClickListener(this);
-
         checkbox = (Button) rlLayout.findViewById(R.id.checkbox_cheese);
         checkbox.setOnClickListener(this);
 
-        mCardArrayAdapter = new CardArrayRecyclerViewAdapter(getContext(), cards);
 
+        //init card recycle view
+        mCardArrayAdapter = new CardArrayRecyclerViewAdapter(getContext(), cards);
         cardRecyclerView = (CardRecyclerView) rlLayout.findViewById(R.id.myList);
+        cardRecyclerView.setOnClickListener(this);
         cardRecyclerView.setHasFixedSize(false);
         cardRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         if (cardRecyclerView != null) {
             cardRecyclerView.setAdapter(mCardArrayAdapter);
         }
 
+        //init firebase
         myFirebaseRef = new Firebase(TabActivity.FIREBASE_URL2 + "/prayers");
 
-
+        //make database calls
         getPairings();
 
         return rlLayout;
@@ -108,12 +116,14 @@ public class PrayerFragment extends Fragment implements View.OnClickListener {
 
                 ArrayList<Prayer> displayArray2 = new ArrayList<Prayer>();
 
+                //get prayers
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Prayer p = postSnapshot.getValue(Prayer.class);
                     displayArray2.add(p);
                     System.out.println(p);
                 }
 
+                //reverse the prayer order
                 for(int i = displayArray2.size() - 1; i >= 0; i--) {
                     displayArray.add(displayArray2.get(i));
                 }
@@ -132,7 +142,7 @@ public class PrayerFragment extends Fragment implements View.OnClickListener {
     }
 
     /**
-     * Function to Initialize cards from Firebase
+     * Function to Initialize cards from Firebase values
      */
     public void initCards() {
         for (Prayer p : displayArray) {
@@ -153,43 +163,45 @@ public class PrayerFragment extends Fragment implements View.OnClickListener {
     }
 
 
+    /**
+     * function for onClick listener
+     */
     public void onClick(View v) {
         switch (v.getId()) {
-            //call to submit meet up!
+
+            //call to send prayer!
             case R.id.send_prayer:
                 System.out.println("sending prayer");
-                /*String text = prayertext.getText().toString();
 
-                MeetUp m = new MeetUp(friend.getName(), friend.getId());
-                MeetUp fm = new MeetUp(personal.getName(), personal.getId());
-                m.setDate(chosenDate.toString());
-                fm.setDate(chosenDate.toString());
+                //get prayer
+                String text = prayertext.getText().toString();
+                Prayer p = new Prayer();
+                p.author = (isAnonymous)? "anonymous" : personal.getName();
+                p.date =  System.currentTimeMillis();
+                p.prayer = text;
 
+                //push stuff to database
                 Firebase getKeyBase = myFirebaseRef.push();
-                getKeyBase.setValue(m);
+                getKeyBase.setValue(p);
                 String postId = getKeyBase.getKey();
 
-                Firebase friendBase = new Firebase(TabActivity.FIREBASE_URL + friend.getId());
 
-                friendBase.child(postId).setValue(fm);*/
-
+                //make text show up at bottom and reset prayer text
                 Toast.makeText(getContext(), "Sent prayer to God", Toast.LENGTH_SHORT).show();
-
-
-
-               // prayertext.setText("");
-
-
-
-
+                prayertext.setText("");
                 break;
 
+            //call to click on checkbox
             case R.id.checkbox_cheese:
                 System.out.println("check!");
                 isAnonymous = !isAnonymous;
                 break;
+
+
+            case R.id.myList:
+                System.out.println("list click!");
+                break;
         }
     }
-
 
 }

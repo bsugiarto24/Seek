@@ -8,6 +8,7 @@
 
     <string name="invite_friends">Meet Up!</string>
     <string name="pick_friend">Pick a friend</string>
-    <string name="Send">send_prayer</string>
+    <string name="Send">Send Prayer</string>
+    <string name="Delete">Delete</string>
 
 </resources>
