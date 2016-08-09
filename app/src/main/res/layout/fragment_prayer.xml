@@ -18,32 +18,36 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress" />
 
-    <TextView
-        android:id="@+id/anonymous"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Anonymous?"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
 
-    <CheckBox android:id="@+id/checkbox_cheese"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:onClick="onCheckboxClicked"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/confirm"
-        android:layout_width="60dp"
-        android:layout_height="80dp"
-        android:src="@drawable/ic_done_black_18dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignBottom="@+id/deny"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="sendPrayer"/>
 
+        <TextView
+            android:id="@+id/anonymous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Anonymous?"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+        <CheckBox android:id="@+id/checkbox_cheese"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""/>
+
+        <Button
+            android:id="@+id/send_prayer"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/Send" />
+
+    </LinearLayout>
 
     <it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView
         android:layout_width="match_parent"

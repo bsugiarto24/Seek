@@ -71,7 +71,7 @@ public class ConfirmCard extends Card {
             //Retrieve elements
             username = (TextView) parent.findViewById(R.id.username);
             deny = (ImageView) parent.findViewById(R.id.deny);
-            confirm = (ImageView) parent.findViewById(R.id.confirm);
+            confirm = (ImageView) parent.findViewById(R.id.sendprayer);
 
             Drawable clear = getContext().getDrawable( R.drawable.ic_clear_black_18dp );
             ColorFilter redFilter = new LightingColorFilter( Color.RED, Color.RED );
