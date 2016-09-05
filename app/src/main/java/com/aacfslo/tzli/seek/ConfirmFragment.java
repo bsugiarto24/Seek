@@ -67,7 +67,7 @@ public class ConfirmFragment extends Fragment {
             cardRecyclerView.setAdapter(mCardArrayAdapter);
         }
 
-        myFirebaseRef = new Firebase(TabActivity.FIREBASE_URL + personal.getId());
+        myFirebaseRef = new Firebase(TabActivity.FIREBASE_URL + "/requests/" + personal.getId());
 
         getPairings();
 

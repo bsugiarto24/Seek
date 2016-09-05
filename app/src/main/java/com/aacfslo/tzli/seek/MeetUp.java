@@ -7,8 +7,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 public class MeetUp {
     private String name;
-    private String id;
-    private String date;
+    private String id; //friend's id
+    private long date;
     private Boolean met;
     private String uniqueId;
 
@@ -21,7 +21,7 @@ public class MeetUp {
         this.met = false;
     }
 
-    public MeetUp(String name, String id, String date) {
+    public MeetUp(String name, String id, long date) {
         this.name = name;
         this.id = id;
         this.date = date;
@@ -36,7 +36,7 @@ public class MeetUp {
         return id;
     }
 
-    public String getDate() {
+    public long getDate() {
         return date;
     }
 
@@ -56,8 +56,8 @@ public class MeetUp {
         this.id = id;
     }
 
-    public void setDate(String date) {
-        this.date = date.substring(0,10);
+    public void setDate(long date) {
+        this.date = date;
     }
 
     public void setMet(Boolean met) {
@@ -95,7 +95,7 @@ public class MeetUp {
 
         if (name != null ? !name.equals(meetUp.name) : meetUp.name != null) return false;
         if (id != null ? !id.equals(meetUp.id) : meetUp.id != null) return false;
-        if (date != null ? !date.equals(meetUp.date) : meetUp.date != null) return false;
+        if (date != date) return false;
         return met != null ? met.equals(meetUp.met) : meetUp.met == null;
 
     }

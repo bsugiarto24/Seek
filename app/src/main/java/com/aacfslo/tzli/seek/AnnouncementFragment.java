@@ -80,7 +80,7 @@ public class AnnouncementFragment extends Fragment {
      * Function to get values from Firebase
      */
     public void getPairings() {
-        myFirebaseRef.addValueEventListener(new ValueEventListener() {
+        myFirebaseRef.orderByChild("date").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 

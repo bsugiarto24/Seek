@@ -60,11 +60,11 @@ public class HistoryFragment extends Fragment {
             cardRecyclerView.setAdapter(mCardArrayAdapter);
         }
 
-        myFirebaseRef = new Firebase(TabActivity.FIREBASE_URL + personal.getId());
+        myFirebaseRef = new Firebase(TabActivity.FIREBASE_URL + "users/" + personal.getName());
 
         // add chart first
-        Card chart = new ChartCard(getActivity());
-        cards.add(chart);
+        //Card chart = new ChartCard(getActivity());
+        //cards.add(chart);
         getPairings();
 
         return rlLayout;
@@ -105,7 +105,9 @@ public class HistoryFragment extends Fragment {
         for (MeetUp m : displayArray) {
             //Create a Card
             Card card = new Card(getContext());
-            card.setTitle("     " + m.getName() + "               " + m.getDate());
+            StringBuilder str = new StringBuilder("                                ");
+            str.setLength(30 - m.getName().length());
+            card.setTitle("     " + m.getName() + str + m.getDate());
 
             //Create thumbnail
             CardThumbnail thumb = new CardThumbnail(getContext());

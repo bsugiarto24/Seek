@@ -18,6 +18,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -108,7 +109,7 @@ public class PrayerFragment extends Fragment implements View.OnClickListener {
      * Function to get values from Firebase
      */
     public void getPairings() {
-        myFirebaseRef.addValueEventListener(new ValueEventListener() {
+        myFirebaseRef.orderByChild("date").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
@@ -146,16 +147,13 @@ public class PrayerFragment extends Fragment implements View.OnClickListener {
      */
     public void initCards() {
         for (Prayer p : displayArray) {
-            //Create a Card
-            Card card = new Card(getContext());
 
             Date d = new Date(p.date);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+            sdf.set2DigitYearStart(d);
 
-
-            card.setTitle(p.prayer +  "\nBy " + p.author + " on " + d.toString() );
-
-            //Create thumbnail
-            CardThumbnail thumb = new CardThumbnail(getContext());
+            Card card = new Card(getContext());
+            card.setTitle(p.prayer +  "\nBy " + p.author + " on " + sdf.format(d));
 
             cards.add(card);
         }

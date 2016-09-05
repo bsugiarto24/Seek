@@ -133,10 +133,15 @@ public class MeetFragment extends Fragment
             //call to submit meet up!
             case R.id.meet_button:
                 if (!friendsPicker.getText().toString().equals("Pick a friend") && chosenDate != null) {
+
+
                     MeetUp m = new MeetUp(friend.getName(), friend.getId());
                     MeetUp fm = new MeetUp(personal.getName(), personal.getId());
-                    m.setDate(chosenDate.toString());
-                    fm.setDate(chosenDate.toString());
+
+
+
+                    m.setDate(chosenDate.getTime());
+                    fm.setDate(chosenDate.getTime());
 
                     Firebase getKeyBase = myFirebaseRef.push();
                     getKeyBase.setValue(m);
@@ -145,6 +150,13 @@ public class MeetFragment extends Fragment
                     Firebase friendBase = new Firebase(TabActivity.FIREBASE_URL + friend.getId());
 
                     friendBase.child(postId).setValue(fm);
+
+
+
+                    Firebase conRef = new Firebase(TabActivity.FIREBASE_URL +"/users/" + personal.getName());
+                    Firebase conRef2 = conRef.push();
+                    conRef2.setValue(m);
+
 
                     Toast.makeText(getContext(), "Sent request to " + friend.getName(), Toast.LENGTH_SHORT).show();
 
