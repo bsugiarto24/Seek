@@ -25,7 +25,7 @@ public class HistoryFragment extends Fragment {
     protected Firebase myFirebaseRef;
     protected FacebookProfile personal;
 
-    protected ArrayList<MeetUp> displayArray;
+    protected ArrayList<MeetupV2> displayArray;
     protected ArrayList<Card> cards;
     CardArrayRecyclerViewAdapter mCardArrayAdapter;
     CardRecyclerView cardRecyclerView;
@@ -60,7 +60,12 @@ public class HistoryFragment extends Fragment {
             cardRecyclerView.setAdapter(mCardArrayAdapter);
         }
 
-        myFirebaseRef = new Firebase(TabActivity.FIREBASE_URL + "users/" + personal.getName());
+        //myFirebaseRef = new Firebase(TabActivity.FIREBASE_URL + "users/" + personal.getName());
+        //https://crackling-inferno-4721.firebaseio.com/users/Bryan%20Sugiarto
+        //https://boiling-heat-1137.firebaseIO.com/
+        myFirebaseRef = new Firebase("https://crackling-inferno-4721.firebaseIO.com/users/Bryan%20Sugiarto/");
+
+        System.out.println("HISTORYYYY");
 
         // add chart first
         //Card chart = new ChartCard(getActivity());
@@ -82,12 +87,17 @@ public class HistoryFragment extends Fragment {
 
                 int arraySize = displayArray.size();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    MeetUp m = postSnapshot.getValue(MeetUp.class);
-
-                    if (m.getMet() && !displayArray.contains(m)) {
+                    MeetupV2 m = postSnapshot.getValue(MeetupV2.class);
+                    System.out.println(m);
+                    if (!displayArray.contains(m)) {
                         displayArray.add(m);
                     }
                 }
+                MeetupV2 m2 = new MeetupV2();
+                m2.Partner = "adf";
+                m2.setDate(23423423);
+
+                displayArray.add(m2);
 
                 if (arraySize != displayArray.size()) {
                     initCards();
@@ -102,21 +112,12 @@ public class HistoryFragment extends Fragment {
     }
 
     public void initCards() {
-        for (MeetUp m : displayArray) {
+        for (MeetupV2 m : displayArray) {
             //Create a Card
             Card card = new Card(getContext());
             StringBuilder str = new StringBuilder("                                ");
-            str.setLength(30 - m.getName().length());
-            card.setTitle("     " + m.getName() + str + m.getDate());
+            card.setTitle("     " + m.Partner);
 
-            //Create thumbnail
-            CardThumbnail thumb = new CardThumbnail(getContext());
-
-            //Set URL resource
-            thumb.setUrlResource(m.retrievePicture());
-
-            //Add thumbnail to a card
-            card.addCardThumbnail(thumb);
 
             cards.add(card);
         }
