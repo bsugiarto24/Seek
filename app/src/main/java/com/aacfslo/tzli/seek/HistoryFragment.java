@@ -25,7 +25,7 @@ public class HistoryFragment extends Fragment {
     protected Firebase myFirebaseRef;
     protected FacebookProfile personal;
 
-    protected ArrayList<MeetupV2> displayArray;
+    protected ArrayList<Post> displayArray;
     protected ArrayList<Card> cards;
     CardArrayRecyclerViewAdapter mCardArrayAdapter;
     CardRecyclerView cardRecyclerView;
@@ -63,7 +63,7 @@ public class HistoryFragment extends Fragment {
         //myFirebaseRef = new Firebase(TabActivity.FIREBASE_URL + "users/" + personal.getName());
         //https://crackling-inferno-4721.firebaseio.com/users/Bryan%20Sugiarto
         //https://boiling-heat-1137.firebaseIO.com/
-        myFirebaseRef = new Firebase("https://crackling-inferno-4721.firebaseIO.com/users/Bryan%20Sugiarto/");
+        myFirebaseRef = new Firebase("https://crackling-inferno-4721.firebaseIO.com/users/Bryan Sugiarto/");
 
         System.out.println("HISTORYYYY");
 
@@ -81,23 +81,22 @@ public class HistoryFragment extends Fragment {
     }
 
     public void getPairings() {
+
+        System.out.println(myFirebaseRef);
+
         myFirebaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
                 int arraySize = displayArray.size();
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    MeetupV2 m = postSnapshot.getValue(MeetupV2.class);
-                    System.out.println(m);
-                    if (!displayArray.contains(m)) {
-                        displayArray.add(m);
-                    }
-                }
-                MeetupV2 m2 = new MeetupV2();
-                m2.Partner = "adf";
-                m2.setDate(23423423);
 
-                displayArray.add(m2);
+
+                //get prayers
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    Post p = postSnapshot.getValue(Post.class);
+                    displayArray.add(p);
+                    System.out.println(p);
+                }
 
                 if (arraySize != displayArray.size()) {
                     initCards();
@@ -112,11 +111,11 @@ public class HistoryFragment extends Fragment {
     }
 
     public void initCards() {
-        for (MeetupV2 m : displayArray) {
+        for (Post m : displayArray) {
             //Create a Card
             Card card = new Card(getContext());
             StringBuilder str = new StringBuilder("                                ");
-            card.setTitle("     " + m.Partner);
+            card.setTitle(m.getPartner());
 
 
             cards.add(card);

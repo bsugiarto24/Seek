@@ -3,37 +3,25 @@ package com.aacfslo.tzli.seek;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
- * Created by terrence on 5/16/16.
+ * Created by Bryan on 5/16/16.
+ * This class represents a prayer from the database
  */
-public class MeetupV2 {
-    private long date;
+public class Post {
     public String Partner;
+    public long date;
 
-    public MeetupV2() {
+    public Post() {
     }
 
-
-
-
-    public long getDate() {
-        return date;
+    public String getPartner() {
+        return Partner;
     }
-
-
-    public void setDate(long date) {
-        this.date = date;
-    }
-
-
-    @JsonIgnoreProperties({
-            "picture"
-    })
 
     @Override
     public String toString() {
         return "{" +
-                "date:'" + date + '\'' +
-                ", partner:'" + Partner + '\'' +
+                "name:'" + Partner + '\'' +
+                ", date:'" + date + '\'' +
                 '}';
     }
 
@@ -42,11 +30,9 @@ public class MeetupV2 {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        MeetupV2 meetUp = (MeetupV2) o;
+        Post meetUp = (Post) o;
 
         if (Partner != null ? !Partner.equals(meetUp.Partner) : meetUp.Partner != null) return false;
-        if (date != date) return false;
-            return true;
-
+        return true;
     }
 }

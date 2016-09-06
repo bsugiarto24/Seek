@@ -14,8 +14,6 @@ public class Prayer {
     public Prayer() {
     }
 
-
-
     @Override
     public String toString() {
         return "{" +
